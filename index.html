@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Gamified Investment Dashboard</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  
+  
+
+  <style>
+    body {
+      font-family: Arial;
+      background: linear-gradient(120deg,#e0f2fe,#bee87b,#76db62);
+      min-height: 100vh;
+      transition: background 0.5s ease;
+    }
+    .card {
+      background: rgb(179, 241, 173);
+      border-radius: 16px;
+      padding: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    }
+    button {
+      background: #10b981;
+      color: white;
+      padding: 10px;
+      border-radius: 10px;
+      width: 100%;
+      margin-top: 10px;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 8px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="p-6 grid grid-cols-3 gap-4">
+
+  <!-- PORTFOLIO -->
+  <div class="card">
+    <h2>📊 Portfolio</h2>
+    <canvas id="chart" height="180"></canvas>
+
+    <p>⭐ Punti: <span id="points">0</span></p>
+    <p>💰 Totale: <span id="total">10000</span>€</p>
+
+    <p>Azioni: <span id="percStocks">40</span>%</p>
+    <p>Obbligazioni: <span id="percBonds">40</span>%</p>
+    <p>Commodities: <span id="percCommodities">20</span>%</p>
+
+    <p id="feedback">Start investing 🚀</p>
+
+    <hr>
+
+    <h3>🏆 Leaderboard</h3>
+    <p>🥇 Patrizia - 6200</p>
+    <p>🥈 Danilo - 5400</p>
+    <p>🥉 Marzia - 5000</p>
+    <p>🏅 Angelo - 4700</p>
+    <p>👉 TU - <span id="points2">0</span></p>
+  </div>
+
+  <!-- PERFORMANCE -->
+  <div class="card">
+    <h2>📈 Crescita Portafoglio</h2>
+    <canvas id="performanceChart"></canvas>
+
+    <hr>
+
+    <h3>📉 Performance Storica (%)</h3>
+    <canvas id="staticPerformanceChart" height="150"></canvas>
+
+    <p>📈 Rendimento annuo: 8%</p>
+    <p>📉 Volatilità: 10%</p>
+    <p>⚠️ Max Drawdown: 14%</p>
+  </div>
+
+  <!-- AZIONI -->
+  <div class="card">
+
+    <h2>📈 Investi</h2>
+
+    <select id="asset">
+      <option value="nvidia">NVIDIA (alto rischio)</option>
+      <option value="apple">Apple (alto rischio)</option>
+      <option value="bond_us">Bond USA (basso rischio)</option>
+      <option value="bond_eu">Bond EU (basso rischio)</option>
+      <option value="gold">Oro (medio rischio)</option>
+      <option value="silver">Argento (medio rischio)</option>
+    </select>
+
+    <input id="amount" type="number" placeholder="Importo €">
+
+    <button onclick="invest()">🚀 INVESTI</button>
+
+    <hr>
+
+    <h3>📰 News Macro-Finanziarie</h3>
+<div class="news-wrapper">
+  <div id="newsFeed" class="news-feed"></div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,199 @@
+body {
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+
+  /* 🌊 FINTECH GRADIENT MOVING */
+  background: linear-gradient(-45deg,
+  #2ce1ae6f,
+  #3cd3694e,
+  #3d62d180,
+  #5edabd75
+);
+
+  background-size: 400% 400%;
+  animation: gradientMove 14s ease infinite;
+
+  color: #020b1f;
+}
+
+/* 🌊 MOVING BACKGROUND */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===================== GLASS CARDS ===================== */
+.card {
+  background: rgba(206, 189, 189, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 18px;
+  padding: 18px;
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 10px 40px rgba(0,0,0,0.5),
+    inset 0 1px 0 rgba(255,255,255,0.05);
+
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+
+  animation: pulseGlow 6s infinite ease-in-out;
+}
+
+/* ✨ HOVER PREMIUM EFFECT */
+.card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.7),
+    0 0 20px rgba(14,165,233,0.3);
+}
+
+/* 🔵 LIGHT SHINE EFFECT */
+.card::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle,
+    rgba(255,255,255,0.08),
+    transparent 60%
+  );
+  transform: rotate(25deg);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+/* ===================== BUTTON FINTECH ===================== */
+button {
+  background: linear-gradient(90deg,
+    #0ea5e9,
+    #10b981,
+    #22c55e
+  );
+
+  color: #111827;
+  padding: 12px;
+  border-radius: 12px;
+  width: 100%;
+  margin-top: 10px;
+
+  font-weight: bold;
+  letter-spacing: 0.5px;
+
+  cursor: pointer;
+
+  transition: all 0.25s ease;
+
+  box-shadow: 0 0 15px rgba(14,165,233,0.3);
+}
+
+/* 🚀 BUTTON HOVER */
+button:hover {
+  transform: scale(1.05);
+  box-shadow:
+    0 0 25px rgba(14,165,233,0.6),
+    0 0 40px rgba(203, 219, 213, 0.3);
+}
+
+/* ===================== INPUT STYLE ===================== */
+input, select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+
+  background: rgba(206, 226, 229, 0.05);
+  color: white;
+
+  outline: none;
+
+  transition: 0.2s ease;
+}
+
+input:focus, select:focus {
+  border-color: #0ea5e9;
+  box-shadow: 0 0 12px rgba(14,165,233,0.4);
+}
+
+/* ===================== TEXT STYLE ===================== */
+h2, h3 {
+  font-weight: bold;
+  color: #020617;
+}
+
+p {
+  color: #1f2937;
+}
+
+/* ===================== CHART ===================== */
+canvas {
+  margin-top: 10px;
+  filter: drop-shadow(0 0 10px rgba(14,165,233,0.2));
+}
+
+/* ===================== GLOW ANIMATION ===================== */
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 10px rgba(14,165,233,0.2); }
+  50% { box-shadow: 0 0 20px rgba(16,185,129,0.4); }
+  100% { box-shadow: 0 0 10px rgba(14,165,233,0.2); }
+}
+
+/* ===================== NEWS SYSTEM (FIXED - NO PAGE GROWTH) ===================== */
+
+.news-wrapper {
+  height: 220px;              /* 🔒 blocca altezza */
+  overflow: hidden;           /* 🔒 impedisce allungamento pagina */
+  position: relative;
+
+  border-radius: 12px;
+  margin-top: 10px;
+
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.news-feed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  animation: scrollNews 14s linear infinite;
+}
+
+.news-item {
+  padding: 10px;
+  font-size: 13px;
+  border-radius: 10px;
+
+  background: rgba(255,255,255,0.9);
+  color: #0f172a;
+
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+/* 🔁 scrolling fluido continuo */
+@keyframes scrollNews {
+  0% { transform: translateY(0%); }
+  100% { transform: translateY(-50%); }
+}
