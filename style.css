@@ -197,3 +197,11 @@ canvas {
   0% { transform: translateY(0%); }
   100% { transform: translateY(-50%); }
 }
+
+.spacer {
+  margin-top: 15px;
+}
+
+hr.spacer {
+  margin: 20px 0;
+}
