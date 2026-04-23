@@ -1,3 +1,4 @@
+
 let portfolio = {
   stocks: 4000,
   bonds: 4000,
