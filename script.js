@@ -1,4 +1,3 @@
-
 let portfolio = {
   stocks: 4000,
   bonds: 4000,
@@ -365,4 +364,125 @@ function invest(){
   updateCharts();
 }
 
+updateCharts();
+
+// ================= UPDATE UI & CHARTS =================
+function updateCharts(){
+  let total = invested;
+
+  // Calcolo percentuali per etichette
+  let s = (portfolio.stocks / total) * 100;
+  let b = (portfolio.bonds / total) * 100;
+  let c = (portfolio.commodities / total) * 100;
+
+  // Aggiornamento grafico a torta
+  chart.data.datasets[0].data = [
+    portfolio.stocks,
+    portfolio.bonds,
+    portfolio.commodities
+  ];
+  chart.update();
+
+  // Aggiornamento testi percentuali
+  document.getElementById("percStocks").innerText = s.toFixed(1);
+  document.getElementById("percBonds").innerText = b.toFixed(1);
+  document.getElementById("percCommodities").innerText = c.toFixed(1);
+
+  // Aggiornamento grafico a linee (Performance €)
+  perfChart.data.labels.push("t" + history.length);
+  perfChart.data.datasets[0].data.push(history[history.length - 1]);
+  perfChart.update();
+
+  // Aggiornamento testi totali e punti
+  document.getElementById("points").innerText = points;
+  document.getElementById("points2").innerText = points;
+  document.getElementById("total").innerText = Math.floor(invested).toLocaleString();
+
+  // MOVIMENTO GAMIFICATION: Aggiorna la barra e l'omino
+  aggiornaGraficaObiettivi();
+}
+
+// ================= FUNZIONE INVESTI =================
+function invest(){
+  let asset = document.getElementById("asset").value;
+  let amountInput = document.getElementById("amount");
+  let amount = Number(amountInput.value);
+
+  if (!amount || amount <= 0) return;
+
+  let item = assets[asset];
+
+  // Aggiornamento portafoglio
+  portfolio[item.type] += amount;
+  invested += amount;
+
+  // Simulazione rendimento
+  let randomReturn = (Math.random() * 0.02 - 0.005);
+  let newValue = invested * (1 + randomReturn);
+  history.push(newValue);
+
+  // Controllo Diversificazione
+  let total = invested;
+  let s = (portfolio.stocks / total) * 100;
+  let b = (portfolio.bonds / total) * 100;
+  let c = (portfolio.commodities / total) * 100;
+
+  let deviation = Math.abs(s - 40) > 20 || Math.abs(b - 40) > 20 || Math.abs(c - 20) > 20;
+  if (deviation) {
+    showAlert("⚠️ Scarsa diversificazione!", "red");
+  } else {
+    showAlert("✅ Ottima diversificazione!", "green");
+  }
+
+  // Punteggio
+  let score = 0;
+  if (item.risk === "low") score += 50;
+  if (item.risk === "medium") score += 20;
+  if (item.risk === "high") score -= 40;
+  points += score;
+
+  showBottomNotification("✔ Operazione eseguita correttamente!", "green");
+
+  // Controllo Milestone (Ogni 5.000€)
+  if (invested >= nextMilestone) {
+    confetti();
+    showBottomNotification("🎉 Obiettivo raggiunto: " + nextMilestone + "€!", "green");
+    nextMilestone += 5000;
+  }
+
+  updateCharts();
+  amountInput.value = ""; // Pulisce il campo input
+}
+
+// ================= FUNZIONE GAMIFICATION (MOVIMENTO) =================
+function aggiornaGraficaObiettivi() {
+  const min = 10000;
+  const max = 30000;
+  const barra = document.getElementById('progressBar');
+  const omino = document.getElementById('investorIcon');
+  const testo = document.getElementById('progressText');
+
+  // Calcola la % di avanzamento tra 10k e 30k
+  let percentuale = ((invested - min) / (max - min)) * 100;
+
+  if (percentuale < 0) percentuale = 0;
+  if (percentuale > 100) percentuale = 100;
+
+  // Applica lo spostamento CSS
+  if(barra) barra.style.width = percentuale + "%";
+  if(omino) omino.style.left = percentuale + "%";
+
+  // Aggiorna il testo sotto la barra
+  if(testo) {
+    if (invested >= 30000) {
+      testo.innerText = "🏆 LIVELLO ELITE RAGGIUNTO!";
+      testo.style.color = "#d97706";
+    } else {
+      let mancano = nextMilestone - invested;
+      testo.innerText = `Mancano ${Math.floor(mancano).toLocaleString()}€ al prossimo obiettivo! 🎯`;
+    }
+  }
+}
+
+// Avvio iniziale
 updateCharts();
