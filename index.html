@@ -8,12 +8,10 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-  
-  
 
   <style>
     body {
-      font-family: Arial;
+      font-family: Arial, sans-serif;
       background: linear-gradient(120deg,#e0f2fe,#bee87b,#76db62);
       min-height: 100vh;
       transition: background 0.5s ease;
@@ -23,6 +21,7 @@
       border-radius: 16px;
       padding: 15px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      height: 100%; /* Assicura che le card siano bilanciate */
     }
     button {
       background: #10b981;
@@ -31,6 +30,7 @@
       border-radius: 10px;
       width: 100%;
       margin-top: 10px;
+      font-weight: bold;
     }
     input, select {
       width: 100%;
@@ -39,75 +39,116 @@
       border: 1px solid #ddd;
       border-radius: 8px;
     }
+    .news-feed {
+      font-size: 0.85rem;
+      color: #374151;
+      line-height: 1.4;
+    }
   </style>
 </head>
 
 <body>
 
-<div class="p-6 grid grid-cols-3 gap-4">
+<div class="p-6 grid grid-cols-1 md:grid-cols-3 gap-4">
 
-  <!-- PORTFOLIO -->
   <div class="card">
-    <h2>📊 Portfolio</h2>
+    <h2 class="text-xl font-bold mb-2">📊 Portfolio</h2>
     <canvas id="chart" height="180"></canvas>
 
-    <p>⭐ Punti: <span id="points">0</span></p>
-    <p>💰 Totale: <span id="total">10000</span>€</p>
+    <div class="mt-4 space-y-1">
+      <p>⭐ Punti: <span id="points" class="font-bold">0</span></p>
+      <p>💰 Totale: <span id="total" class="font-bold">10000</span>€</p>
+      <hr class="my-2 border-green-200">
+      <p>Azioni: <span id="percStocks">40</span>%</p>
+      <p>Obbligazioni: <span id="percBonds">40</span>%</p>
+      <p>Commodities: <span id="percCommodities">20</span>%</p>
+    </div>
 
-    <p>Azioni: <span id="percStocks">40</span>%</p>
-    <p>Obbligazioni: <span id="percBonds">40</span>%</p>
-    <p>Commodities: <span id="percCommodities">20</span>%</p>
+    <p id="feedback" class="mt-4 text-center font-semibold text-green-700">Start investing 🚀</p>
 
-    <p id="feedback">Start investing 🚀</p>
-
-    <hr>
-
-    <h3>🏆 Leaderboard</h3>
-    <p>🥇 Patrizia - 6200</p>
-    <p>🥈 Danilo - 5400</p>
-    <p>🥉 Marzia - 5000</p>
-    <p>🏅 Angelo - 4700</p>
-    <p>👉 TU - <span id="points2">0</span></p>
+    <div class="mt-6">
+      <h3 class="font-bold border-b border-green-300 mb-2">🏆 Leaderboard</h3>
+      <div class="space-y-1 text-sm">
+        <p>🥇 Patrizia - 6200</p>
+        <p>🥈 Danilo - 5400</p>
+        <p>🥉 Marzia - 5000</p>
+        <p>🏅 Angelo - 4700</p>
+        <p class="font-bold text-green-800">👉 TU - <span id="points2">0</span></p>
+      </div>
+    </div>
   </div>
 
-  <!-- PERFORMANCE -->
   <div class="card">
-    <h2>📈 Crescita Portafoglio</h2>
+    <h2 class="text-xl font-bold mb-2">📈 Crescita Portafoglio</h2>
     <canvas id="performanceChart"></canvas>
 
-    <hr>
+    <div class="mt-6">
+      <h3 class="font-bold mb-2">📉 Performance Storica (%)</h3>
+      <canvas id="staticPerformanceChart" height="150"></canvas>
+      <div class="mt-3 space-y-1">
+        <p>📈 Rendimento annuo: 8%</p>
+        <p>📉 Volatilità: 10%</p>
+        <p>⚠️ Max Drawdown: 14%</p>
+      </div>
+    </div>
 
-    <h3>📉 Performance Storica (%)</h3>
-    <canvas id="staticPerformanceChart" height="150"></canvas>
+    <div style="margin-top: 25px; padding-top: 15px; border-top: 1px dashed rgba(0,0,0,0.1);">
+      <div style="position: relative; height: 6px; background: #cbd5e1; border-radius: 3px; margin: 25px 10px 15px 10px;">
+        
+        <div id="progressBar" style="position: absolute; top: 0; left: 0; height: 100%; width: 0%; background: #10b981; border-radius: 3px; transition: width 0.8s ease;"></div>
+        
+        <div id="investorIcon" style="position: absolute; top: -24px; left: 0%; transform: translateX(-50%); transition: left 0.8s ease; text-align: center;">
+          <span style="font-size: 16px; display: block;">👨‍💻</span>
+          <div style="background: #10b981; color: white; padding: 1px 4px; border-radius: 3px; font-size: 8px; font-weight: bold; margin-top: -2px;">TU</div>
+        </div>
 
-    <p>📈 Rendimento annuo: 8%</p>
-    <p>📉 Volatilità: 10%</p>
-    <p>⚠️ Max Drawdown: 14%</p>
+        <div style="display: flex; justify-content: space-between; position: absolute; width: 100%; top: 10px;">
+          <div style="text-align: center; font-size: 9px; color: #065f46;"><strong>10k</strong><br>Start</div>
+          <div style="text-align: center; font-size: 9px; color: #475569;"><strong>15k</strong><br>Lv.1</div>
+          <div style="text-align: center; font-size: 9px; color: #475569;"><strong>20k</strong><br>Lv.2</div>
+          <div style="text-align: center; font-size: 9px; color: #475569;"><strong>25k</strong><br>Lv.3</div>
+          <div style="text-align: center; font-size: 9px; color: #475569;"><strong>30k</strong><br>Elite</div>
+        </div>
+      </div>
+      <p id="progressText" style="text-align: center; font-size: 10px; color: #065f46; font-weight: bold; margin-top: 30px;">Prossimo obiettivo: 15.000€ 🚀</p>
+    </div>
   </div>
 
-  <!-- AZIONI -->
   <div class="card">
+    <h2 class="text-xl font-bold mb-2">📈 Investi</h2>
 
-    <h2>📈 Investi</h2>
+    <div class="space-y-4">
+      <div>
+        <label class="text-xs font-semibold text-gray-600">Seleziona Asset</label>
+        <select id="asset">
+          <option value="nvidia">NVIDIA (alto rischio)</option>
+          <option value="apple">Apple (alto rischio)</option>
+          <option value="bond_us">Bond USA (basso rischio)</option>
+          <option value="bond_eu">Bond EU (basso rischio)</option>
+          <option value="gold">Oro (medio rischio)</option>
+          <option value="silver">Argento (medio rischio)</option>
+        </select>
+      </div>
 
-    <select id="asset">
-      <option value="nvidia">NVIDIA (alto rischio)</option>
-      <option value="apple">Apple (alto rischio)</option>
-      <option value="bond_us">Bond USA (basso rischio)</option>
-      <option value="bond_eu">Bond EU (basso rischio)</option>
-      <option value="gold">Oro (medio rischio)</option>
-      <option value="silver">Argento (medio rischio)</option>
-    </select>
+      <div>
+        <label class="text-xs font-semibold text-gray-600">Importo da investire</label>
+        <input id="amount" type="number" placeholder="Importo €">
+      </div>
 
-    <input id="amount" type="number" placeholder="Importo €">
+      <button onclick="invest()">🚀 INVESTI ORA</button>
+    </div>
 
-    <button onclick="invest()">🚀 INVESTI</button>
+    <div class="mt-10">
+      <h3 class="font-bold border-b border-green-300 mb-3">📰 News Macro-Finanziarie</h3>
+      <div id="newsFeed" class="news-feed space-y-3">
+        <p>📌 <strong>FED:</strong> Segnali di tassi invariati per il prossimo trimestre.</p>
+        <p>📌 <strong>Tech:</strong> NVIDIA tocca nuovi massimi storici grazie all'AI.</p>
+        <p>📌 <strong>Mercati:</strong> L'oro si conferma bene rifugio in questa sessione.</p>
+      </div>
+    </div>
+  </div>
 
-    <hr>
-
-    <h3>📰 News Macro-Finanziarie</h3>
-<div class="news-wrapper">
-  <div id="newsFeed" class="news-feed"></div>
+</div>
 
 <script src="script.js"></script>
 
