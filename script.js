@@ -307,6 +307,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   // ================= AZIONI / CRYPTO =================
   "📊 S&P500 in accelerazione: miglioramento del sentiment macro → storicamente aumenta la propensione al rischio e può sostenere anche Bitcoin per correlazione risk-on",
+  "🚀 Nvidia guida l'AI (+ Momentum): forte spinta su tech e semiconduttori, ma rischio bolla per eccessiva concentrazione → conviene diversificare su settori utilizzatori di AI per mitigare la volatilità",
 
   // ================= MACRO GENERALI =================
   "🔥 Spike volatilità globale: aumenta il rischio sui mercati → capitali si spostano verso asset difensivi come bond e oro",
@@ -314,6 +315,8 @@ window.addEventListener("DOMContentLoaded", () => {
   "⚡ Tech sector in ripresa: liquidità e aspettative di crescita tornano positive → favorisce aziende growth e indici Nasdaq-heavy",
 
   "📉 Bond yields in calo: segnali di rallentamento economico → obbligazioni lunghe più attrattive per effetto prezzo",
+      
+  "🌍 Attesa inflazione UE: pressione sulla BCE per mantenere tassi elevati, con conseguente calo del prezzo dei bond esistenti → opportunità su obbligazioni a breve termine per catturare rendimenti cedolari più alti",
 
 ];
 
