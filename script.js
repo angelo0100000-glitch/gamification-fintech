@@ -268,11 +268,10 @@ function confetti(){
 const newsItems = [
 
   // 📊 mercati
-  "📊 Mercati europei misti → incertezza macro tra crescita e inflazione",
+  "🌍 Attesa inflazione UE: pressione sulla BCE per mantenere tassi elevati, con conseguente calo del prezzo dei bond esistenti → opportunità su obbligazioni a breve termine per catturare rendimenti cedolari più alti",
 
   // 🚀 settori
-  "🚀 Nvidia guida il settore AI → forte momentum su crescita tecnologica",
-  "🌍 Attesa inflazione UE → possibile impatto su tassi BCE e obbligazioni europee"
+  "🚀 Nvidia guida l'AI (+ Momentum): forte spinta su tech e semiconduttori, ma rischio bolla per eccessiva concentrazione → conviene diversificare su settori utilizzatori di AI per mitigare la volatilità"
 ];
 
 
