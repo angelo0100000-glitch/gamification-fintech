@@ -28,9 +28,9 @@ const chart = new Chart(document.getElementById("chart"), {
     datasets: [{
       data: [4000, 4000, 2000],
       backgroundColor: [
-        "#e31d2b", // Rosso Perù (Energia)
-        "#1e293b", // Blu Navy (Autorità)
-        "#c5a059"  // Oro (Ricchezza)
+        "#3b82f6", // Blu Brillante (Sicurezza e Tecnologia)
+        "#22c55e", // Verde Smeraldo (Crescita e Profitto)
+        "#f59e0b"  // Arancione Ambra (Energia e Attenzione)
       ],
       borderWidth: 3,           // Crea una separazione netta tra le fette
       borderColor: "#ffffff",   // Bordo bianco per far "brillare" i colori
