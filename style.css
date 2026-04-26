@@ -207,5 +207,10 @@ hr.spacer {
 }
 
 #chart {
-    filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.1));
+    transition: transform 0.3s ease;
+}
+
+#chart:hover {
+    cursor: pointer;
+    filter: drop-shadow(0px 15px 25px rgba(227, 29, 43, 0.2)); /* Ombra colorata che segue l'accento del brand */
 }
