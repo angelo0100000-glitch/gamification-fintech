@@ -17,18 +17,38 @@ const assets = {
   bond_us: { type: "bonds", risk: "low" },
   bond_eu: { type: "bonds", risk: "low" },
   gold: { type: "commodities", risk: "medium" },
-  silver: { type: "commodities", risk: "medium" }
+  rame: { type: "commodities", risk: "medium" }
 };
 
 // ================= PIE =================
 const chart = new Chart(document.getElementById("chart"), {
-  type: "pie",
+  type: "doughnut", // Più moderno e "tech" rispetto alla torta piena
   data: {
-    labels: ["Azioni","Obbligazioni","Commodities"],
+    labels: ["Azioni", "Obbligazioni", "Commodities"],
     datasets: [{
-      data: [4000,4000,2000],
-      backgroundColor: ["#3b82f6","#22c55e","#f59e0b"]
+      data: [4000, 4000, 2000],
+      backgroundColor: ["#e31d2b", "#1e293b", "#c5a059"], // Rosso Perù, Blu Navy, Oro
+      borderWidth: 0,            // Rimuove i bordi per un look più pulito
+      hoverOffset: 25,           // Effetto gamificato: la fetta "salta fuori" al passaggio del mouse
+      spacing: 5                 // Crea un piccolo distacco tra le fette (stile dashboard premium)
     }]
+  },
+  options: {
+    cutout: "75%",               // Rende l'anello più sottile ed elegante
+    plugins: {
+      legend: {
+        position: 'bottom',      // Legenda sotto per dare spazio al grafico
+        labels: {
+          usePointStyle: true,   // Trasforma i quadrati in cerchietti eleganti
+          padding: 20,
+          font: { family: 'Plus Jakarta Sans', size: 12 }
+        }
+      }
+    },
+    animation: {
+      animateScale: true,        // Effetto di crescita all'apertura (molto gratificante)
+      animateRotate: true
+    }
   }
 });
 
@@ -66,7 +86,7 @@ const staticChart = new Chart(
   {
     type: "line",
     data: {
-      labels:["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic","Fine"],
+      labels:["Gen","Feb","Mar","Apr","Mag","Giu","Lug","Ago","Set","Ott","Nov","Dic"],
       datasets:[{
         label:"Performance (%)",
         data: generateStaticPerformance(),
@@ -346,9 +366,9 @@ function invest(){
   }
 
   let score=0;
-  if(item.risk==="low") score+=50;
-  if(item.risk==="medium") score+=20;
-  if(item.risk==="high") score-=40;
+  if(item.risk==="low") score+=200;
+  if(item.risk==="medium") score+=150;
+  if(item.risk==="high") score+=50;
 
   points+=score;
 
