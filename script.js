@@ -388,12 +388,20 @@ function invest(){
     showAlert("✅ Ottima diversificazione!","green");
   }
 
-  let score=0;
-  if(item.risk==="low") score+=200;
-  if(item.risk==="medium") score+=150;
-  if(item.risk==="high") score+=50;
+ let score = 0;
 
-  points+=score;
+if (Array.isArray(item.risk)) {
+  if (item.risk.includes("low")) score += 200;
+  if (item.risk.includes("medium")) score += 150;
+  if (item.risk.includes("high")) score += 50;
+} else {
+  // fallback se è ancora stringa
+  if (item.risk === "low") score += 200;
+  if (item.risk === "medium") score += 150;
+  if (item.risk === "high") score += 50;
+}
+
+points += score;
 
   // SOLO NOTIFICA BASSA
   showBottomNotification("✔ Operazione eseguita correttamente!", "green");
