@@ -488,9 +488,9 @@ function invest(){
 
   // Punteggio
   let score = 0;
-  if (item.risk === "low") score += 50;
-  if (item.risk === "medium") score += 20;
-  if (item.risk === "high") score -= 40;
+  if (item.risk === "low") score += 200;
+  if (item.risk === "medium") score += 150;
+  if (item.risk === "high") score += 20;
   points += score;
 
   showBottomNotification("✔ Operazione eseguita correttamente!", "green");
