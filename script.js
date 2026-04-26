@@ -22,32 +22,55 @@ const assets = {
 
 // ================= PIE =================
 const chart = new Chart(document.getElementById("chart"), {
-  type: "doughnut", // Più moderno e "tech" rispetto alla torta piena
+  type: "pie",
   data: {
     labels: ["Azioni", "Obbligazioni", "Commodities"],
     datasets: [{
       data: [4000, 4000, 2000],
-      backgroundColor: ["#e31d2b", "#1e293b", "#c5a059"], // Rosso Perù, Blu Navy, Oro
-      borderWidth: 0,            // Rimuove i bordi per un look più pulito
-      hoverOffset: 25,           // Effetto gamificato: la fetta "salta fuori" al passaggio del mouse
-      spacing: 5                 // Crea un piccolo distacco tra le fette (stile dashboard premium)
+      backgroundColor: [
+        "#e31d2b", // Rosso Perù (Energia)
+        "#1e293b", // Blu Navy (Autorità)
+        "#c5a059"  // Oro (Ricchezza)
+      ],
+      borderWidth: 3,           // Crea una separazione netta tra le fette
+      borderColor: "#ffffff",   // Bordo bianco per far "brillare" i colori
+      hoverOffset: 35,          // GAMIFICATION: La fetta si stacca molto nettamente
+      hoverBorderWidth: 5,      // Il bordo aumenta quando interagisci
+      hoverBorderColor: "#000"  // Il bordo diventa scuro per dare un senso di "selezione"
     }]
   },
   options: {
-    cutout: "75%",               // Rende l'anello più sottile ed elegante
     plugins: {
       legend: {
-        position: 'bottom',      // Legenda sotto per dare spazio al grafico
+        display: true,
+        position: 'bottom',
         labels: {
-          usePointStyle: true,   // Trasforma i quadrati in cerchietti eleganti
-          padding: 20,
-          font: { family: 'Plus Jakarta Sans', size: 12 }
+          usePointStyle: true,  // Legenda con cerchietti invece di quadrati
+          padding: 25,
+          font: {
+            family: 'Plus Jakarta Sans',
+            size: 13,
+            weight: 'bold'
+          }
         }
+      },
+      tooltip: {
+        // Tooltip gamificato: grande e con ombre
+        enabled: true,
+        backgroundColor: '#1e293b',
+        titleFont: { size: 16, weight: 'bold' },
+        bodyFont: { size: 14 },
+        cornerRadius: 15,
+        displayColors: false,
+        padding: 15
       }
     },
+    layout: {
+        padding: 20 // Spazio extra per permettere alle fette di "uscire" senza tagliarsi
+    },
     animation: {
-      animateScale: true,        // Effetto di crescita all'apertura (molto gratificante)
-      animateRotate: true
+      duration: 2500,           // Animazione lunga e scenografica
+      easing: 'easeOutElastic', // GAMIFICATION: Effetto "molla" (rimbalzo) alla fine
     }
   }
 });
