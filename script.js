@@ -17,7 +17,7 @@ const assets = {
   bond_us: { type: "bonds", risk: "low" },
   bond_eu: { type: "bonds", risk: "low" },
   gold: { type: "commodities", risk: "medium" },
-  rame: { type: "commodities", risk: "medium" }
+  silver: { type: "commodities", risk: "medium" }
 };
 
 // ================= PIE =================
