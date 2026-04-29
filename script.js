@@ -527,15 +527,22 @@ function aggiornaGraficaObiettivi() {
   if(omino) omino.style.left = percentuale + "%";
 
   // Aggiorna il testo sotto la barra
-  if(testo) {
+ if(testo) {
+    // Ingrandisce la scritta per entrambi i casi (puoi regolare i px)
+    testo.style.fontSize = "15px"; 
+    testo.style.fontWeight = "bold"; // Opzionale: la rende anche in grassetto
+    testo.style.display = "block";   // Assicura che lo stile venga applicato bene
+    testo.style.marginTop = "55px";  // Aggiunge un po' di spazio sopra
+
     if (invested >= 30000) {
       testo.innerText = "🏆 LIVELLO ELITE RAGGIUNTO!";
       testo.style.color = "#d97706";
     } else {
       let mancano = nextMilestone - invested;
       testo.innerText = `Mancano ${Math.floor(mancano).toLocaleString()}€ al prossimo obiettivo! 🎯`;
+      testo.style.color = "#f1a500"; // Colore scuro standard per leggibilità
     }
-  }
+}
 }
 
 // Avvio iniziale
